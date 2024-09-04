@@ -24,12 +24,14 @@ To run this project locally:
    ```bash
    git clone https://github.com/yourusername/xelanepo.git
 
-2. Install the dependencies:
+2. Navigate to the project directory:
+   ```bash
+   cd xelanepo
+
+3. Install the dependencies:
    ```bash
    npm install
 
-3. Start the development server:
+4. Start the development server:
    ```bash
-    npm start
-
-4. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+    npm run dev
