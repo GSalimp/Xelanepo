@@ -13,17 +13,19 @@ function Home(){
 }
 
 const MainSection = () => (
-    <section className="main-section">
-      <div className="content">
-        <h1>Pesquise autores e citações!</h1>
-        <p>Explore e analise a trajetória acadêmica de pesquisadores de diversas áreas do conhecimento. Nosso portal oferece uma ferramenta avançada de busca que permite acessar dados completos sobre autores científicos de todo o mundo.</p>
-        <button>Experimente</button>
-      </div>
-      <div className="image">
-        <img src="home.png" alt="Pesquisa de autores e citações" />
-      </div>
-    </section>
-  );
+  <section className="main-section">
+    <div className="content">
+    <h1>Pesquise autores e citações!</h1>
+    <p>Explore e analise a trajetória acadêmica de pesquisadores de diversas áreas do conhecimento. Nosso portal oferece uma ferramenta avançada de busca que permite acessar dados completos sobre autores científicos de todo o mundo.</p>
+    <Link to="/Search">
+      <button>Experimente</button>
+    </Link>
+    </div>
+    <div className="image">
+    <img src="home.png" alt="Pesquisa de autores e citações" />
+    </div>
+  </section>
+);
   
   const StatisticsSection = () => (
     <section className="statistics-section">
