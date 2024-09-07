@@ -12,7 +12,6 @@ import './App.css';
 function App() {
   return (
     <BrowserRouter>
-      <h1>Site</h1>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />

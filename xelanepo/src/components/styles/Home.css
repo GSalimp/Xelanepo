@@ -1,0 +1,63 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.main-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50px;
+  background-color: #e7ecff;
+}
+
+.main-section .content {
+  max-width: 600px;
+}
+
+.main-section h1 {
+  font-size: 2.5rem;
+  color: #222;
+}
+
+.main-section p {
+  margin: 20px 0;
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.main-section button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #3458d8;
+  border: none;
+  cursor: pointer;
+}
+
+.main-section button:hover {
+  background-color: #2e4ecf;
+}
+
+.statistics-section {
+  padding: 50px;
+  background-color: #e7ecff;
+}
+
+.statistics-section h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.statistics-section ul {
+  list-style: none;
+}
+
+.statistics-section ul li {
+  margin-bottom: 10px;
+}
