@@ -13,6 +13,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 50px;
+  padding-right: 0;
   background-color: #e7ecff;
 }
 
@@ -60,4 +61,8 @@ body {
 
 .statistics-section ul li {
   margin-bottom: 10px;
+}
+
+.image{
+  overflow: hidden;
 }

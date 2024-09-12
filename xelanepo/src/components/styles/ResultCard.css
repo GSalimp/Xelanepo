@@ -1,0 +1,69 @@
+
+.card {
+    background-color: white;
+    width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.filter{
+    background-color: white;
+    border-radius: 5px;
+    border-color: black;
+    border-width: 2px;
+}
+
+.profile-img {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 10px;
+}
+
+.profile-img img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.name {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.institution {
+    font-size: 14px;
+    color: gray;
+}
+
+.icons {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 15px 0;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-size: 16px;
+}
+
+.icon span {
+    font-size: 24px;
+}
+
+.see-more-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.see-more-btn:hover {
+    background-color: #0056b3;
+}

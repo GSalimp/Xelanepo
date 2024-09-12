@@ -25,6 +25,11 @@ body {
   color: #3458d8;
 }
 
+.header nav{
+  display: flex;
+  align-items: center;
+}
+
 .header nav ul {
   display: flex;
   list-style: none;

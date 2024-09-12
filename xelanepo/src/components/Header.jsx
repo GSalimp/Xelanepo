@@ -7,8 +7,8 @@ const Header = () => (
       <div className="logo">XELANEPO</div>
       <nav>
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/Search">App</a></li>
+          <li><Link to="/"><span>Home</span></Link></li>
+          <li><Link to="/Search"><span>App</span></Link></li>
         </ul>
       </nav>
     </header>
