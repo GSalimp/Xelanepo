@@ -8,8 +8,9 @@ import './../styles/Search.css';
 
 // mobile
 // slider quebrado
-// pagination da API
+// pagination da API com o see more dos cards
 // buscar na API via dados digitados
+// preencher as instituições no select pela api uma vez no inico da aplicação = useEffect
 
 function Search() {
     const [minValueWorks, setMinValueWorks] = useState(2500);
