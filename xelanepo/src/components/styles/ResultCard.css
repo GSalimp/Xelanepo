@@ -2,6 +2,7 @@
 .card {
     background-color: white;
     width: 300px;
+    height: 300px;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -62,6 +63,11 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 14px;
+}
+
+.see-more-btn a{
+    text-decoration: none;
+    color: white;
 }
 
 .see-more-btn:hover {

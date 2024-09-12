@@ -1,38 +1,111 @@
-import React from "react";
-import './../styles/Search.css';
+import React, { useState } from "react";
+
 import { ResultCard } from "./ResultCard";
+import { RangeSlider } from './RangeSlider';
+import { MultiSelect } from "./MultiSelect";
+
+import './../styles/Search.css';
+
+// mobile
+// slider quebrado
+// pagination da API
+// buscar na API via dados digitados
 
 function Search() {
+    const [minValueWorks, setMinValueWorks] = useState(2500);
+    const [maxValueWorks, setMaxValueWorks] = useState(7500);
+
+    const [minValueCites, setMinValueCites] = useState(2500);
+    const [maxValueCites, setMaxValueCites] = useState(7500);
+
+    const [selectedOptions, setSelectedOptions] = useState([]);
+
+    const MOCKDATA = [
+        {
+            name: "Name",
+            last_known_institutions: "Last Institution",
+            profileImg: "./profilePLaceholder.svg",
+            cited_by_count: 90,
+            works_count: 1,
+            id: 1
+        },
+        {
+            name: "Name",
+            last_known_institutions: "Last Institution",
+            profileImg: "./profilePLaceholder.svg",
+            cited_by_count: 90,
+            works_count: 10,
+            id: 2
+        }
+    ]
+
+    const handleChange = (e) => {
+        e.preventDefault();
+        console.log({
+            minValueWorks,
+            maxValueWorks,
+            minValueCites,
+            maxValueCites,
+            selectedOptions
+
+        });
+    };
+
     return (
         <div className="search-page">
             <h1>Search</h1>
-            <div class="search-box">
-                <input type="text" placeholder="Search a name" />
-                <span class="search-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z" stroke="#596780" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M22 22L20 20" stroke="#596780" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
+            <div className="search-box">
+                <input type="text" placeholder="Search a name" onChange={handleChange}/>
+                <span className="search-icon">
+                    <img src="./search.svg" alt="Fitler Icon" />
                 </span>
-                <span class="filter-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M22 6.5H16" stroke="#596780" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M6 6.5H2" stroke="#596780" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M10 10C11.933 10 13.5 8.433 13.5 6.5C13.5 4.567 11.933 3 10 3C8.067 3 6.5 4.567 6.5 6.5C6.5 8.433 8.067 10 10 10Z" stroke="#596780" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M22 17.5H18" stroke="#596780" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M8 17.5H2" stroke="#596780" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M14 21C15.933 21 17.5 19.433 17.5 17.5C17.5 15.567 15.933 14 14 14C12.067 14 10.5 15.567 10.5 17.5C10.5 19.433 12.067 21 14 21Z" stroke="#596780" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
+                <span className="filter-icon">
+                    <img src="./filter.svg" alt="Fitler Icon" />
                 </span>
             </div>
 
             <div className="search-result-filter">
-                <div className="filter">
-                    <h2>Filter</h2>
-                </div>
-                <div class="results">  
-                    <ResultCard />
-                    <ResultCard />
+                <form className="filter">
+                    <h2 className="filter-title">Filter</h2>
+
+                    <div className="filter-item">
+                        <span>Works</span>
+                        <RangeSlider 
+                            minValue={minValueWorks}
+                            maxValue={maxValueWorks}
+                            setMinValue={setMinValueWorks}
+                            setMaxValue={setMaxValueWorks}
+                            priceGap={1000}
+                        />
+                    </div>
+
+                    <div className="filter-item">
+                        <span>Institutions</span>
+                        <MultiSelect 
+                        selectedOptions={selectedOptions}
+                        setSelectedOptions={setSelectedOptions}/>
+                    </div>
+
+                    <div className="filter-item">
+                        <span>Cites Count</span>
+                        <RangeSlider className="filter-item"
+                            minValue={minValueCites}
+                            maxValue={maxValueCites}
+                            setMinValue={setMinValueCites}
+                            setMaxValue={setMaxValueCites}
+                            priceGap={1000}
+                        />
+                    </div>
+
+                    <div className="filter-item">
+                        <button className="apply-btn" type="submit" onClick={handleChange}>Apply</button>
+                    </div>
+                </form>
+                
+                <div className="results">
+                    {MOCKDATA.map((data) => {
+                        return <ResultCard data={data} key={data.id} />
+                    })}
                 </div>
             </div>
         </div>

@@ -1,34 +1,37 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import './../styles/ResultCard.css';
 
-function ResultCard() {
+function ResultCard({data}) {
     return (
-        <div class="card">
-            <h3 class="name">Name</h3>
-            <p class="institution">Last Institution</p>
-            <div class="profile-img">
-                <img src="./profilePLaceholder.svg" alt="Profile Image" />
+        <div className="card">
+            <h3 className="name">{data.name}</h3>
+            <p className="institution">{data.last_known_institutions}</p>
+            <div className="profile-img">
+                <img src={data.profileImg} alt="Profile Image" />
             </div>
 
-            <div class="icons">
-                <div class="icon">
+            <div className="icons">
+                <div className="icon">
                     <span>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M21.75 0H15.75C14.5078 0 13.5 1.15179 13.5 2.57143V9.42857C13.5 10.8482 14.5078 12 15.75 12H19.5V15.4286C19.5 17.3196 18.1547 18.8571 16.5 18.8571H16.125C15.5016 18.8571 15 19.4304 15 20.1429V22.7143C15 23.4268 15.5016 24 16.125 24H16.5C20.6437 24 24 20.1643 24 15.4286V2.57143C24 1.15179 22.9922 0 21.75 0ZM8.25 0H2.25C1.00781 0 0 1.15179 0 2.57143V9.42857C0 10.8482 1.00781 12 2.25 12H6V15.4286C6 17.3196 4.65469 18.8571 3 18.8571H2.625C2.00156 18.8571 1.5 19.4304 1.5 20.1429V22.7143C1.5 23.4268 2.00156 24 2.625 24H3C7.14375 24 10.5 20.1643 10.5 15.4286V2.57143C10.5 1.15179 9.49219 0 8.25 0Z" fill="#90A3BF" />
                         </svg>
                     </span>
-                    <p>90</p>
+                    <p>{data.cited_by_count}</p>
                 </div>
-                <div class="icon">
+                <div className="icon">
                     <span>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M23 0H3.66667C3.11438 0 2.66667 0.671562 2.66667 1.5V2H1C0.447708 2 0 2.67156 0 3.5V20.5C0 22.433 1.04467 24 2.33333 24H22C23.1046 24 24 22.6569 24 21V1.5C24 0.671562 23.5523 0 23 0ZM2.33333 21C2.24493 21 2.16014 20.9473 2.09763 20.8536C2.03512 20.7598 2 20.6326 2 20.5V5H2.66667V20.5C2.66667 20.6326 2.63155 20.7598 2.56904 20.8536C2.50652 20.9473 2.42174 21 2.33333 21ZM12.1667 20H5.83333C5.55721 20 5.33333 19.6642 5.33333 19.25V18.75C5.33333 18.3358 5.55721 18 5.83333 18H12.1667C12.4428 18 12.6667 18.3358 12.6667 18.75V19.25C12.6667 19.6642 12.4428 20 12.1667 20ZM20.8333 20H14.5C14.2239 20 14 19.6642 14 19.25V18.75C14 18.3358 14.2239 18 14.5 18H20.8333C21.1095 18 21.3333 18.3358 21.3333 18.75V19.25C21.3333 19.6642 21.1095 20 20.8333 20ZM12.1667 14H5.83333C5.55721 14 5.33333 13.6642 5.33333 13.25V12.75C5.33333 12.3358 5.55721 12 5.83333 12H12.1667C12.4428 12 12.6667 12.3358 12.6667 12.75V13.25C12.6667 13.6642 12.4428 14 12.1667 14ZM20.8333 14H14.5C14.2239 14 14 13.6642 14 13.25V12.75C14 12.3358 14.2239 12 14.5 12H20.8333C21.1095 12 21.3333 12.3358 21.3333 12.75V13.25C21.3333 13.6642 21.1095 14 20.8333 14ZM20.8333 8H5.83333C5.55721 8 5.33333 7.66419 5.33333 7.25V4.75C5.33333 4.33581 5.55721 4 5.83333 4H20.8333C21.1095 4 21.3333 4.33581 21.3333 4.75V7.25C21.3333 7.66419 21.1095 8 20.8333 8Z" fill="#AAAAAA" />
                         </svg>
                     </span>
-                    <p>2</p>
+                    <p>{data.works_count}</p>
                 </div>
             </div>
-            <button class="see-more-btn">See More</button>
+            <button className="see-more-btn"><Link to={`/Profile/${data.id}`}><span>See More</span></Link></button>
+            
         </div>
     )
 }
