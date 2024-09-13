@@ -1,22 +1,15 @@
 import React, { useState, useEffect } from "react";
 import "./../styles/RangeSlider.css"; // Assuming CSS is stored in a separate file
 
-function RangeSlider({minValue, setMinValue, maxValue, setMaxValue, valueGap, title}) {
+function RangeSlider({minValue, setMinValue, maxValue, setMaxValue, valueGap}) {
   useEffect(() => {
-    const handleSliderChange = () => {
-      const minValueCurrant = parseInt(minValue);
-      const maxValueCurrant = parseInt(maxValue);
+    const minValueCurrant = parseInt(minValue);
+    const maxValueCurrant = parseInt(maxValue);
 
-      if (minValueCurrant - maxValueCurrant < valueGap) {
-        if (maxValueCurrant < minValueCurrant) {
-          setMinValue(minValueCurrant - valueGap);
-        } else {
-          setMaxValue(maxValueCurrant + valueGap);
-        }
-      }
-    };
-    handleSliderChange();
-  }, [minValue, maxValue]);
+    if (maxValueCurrant - minValueCurrant < valueGap) {
+        setMaxValue(minValueCurrant + valueGap);
+    }
+}, [minValue, maxValue, valueGap]);
 
   const handleMinInputChange = (e) => {
     const value = parseInt(e.target.value);
@@ -43,9 +36,6 @@ function RangeSlider({minValue, setMinValue, maxValue, setMaxValue, valueGap, ti
 
   return (
     <div className="wrapper">
-      <div className="filter-title">
-        <span>{title}</span>
-      </div>
       <div className="slider">
         <div
           className="progress"
