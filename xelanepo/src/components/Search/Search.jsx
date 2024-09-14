@@ -6,9 +6,42 @@ import { MultiSelect } from "./MultiSelect";
 
 import './../styles/Search.css';
 
+async function fetchAuthors(searchInput = "", page = 1, per_page = 10) {
+    try {
+      let queryString = "";
+      if (searchInput !== "") {
+        queryString = `q=${searchInput.trim()}&`;
+      }
+  
+      const response = await fetch(
+        `https://api.openalex.org/autocomplete/authors?${queryString}`
+      );
+      const data = await response.json();
+      return data.results;      ;
+    } 
+    catch (error) {
+      console.error(error);
+      return [];
+    }
+}
 
+// async function getAuthorsInstiution() {
+//     try {
+//       const response = await fetch(
+//         `https://api.openalex.org/autocomplete/institutions`
+//       );
+//       const data = await response.json();
+//       return data.results;
+//     } 
+//     catch (error) {
+//       console.error(error);
+//       return [];
+//     }
+// }
 
 function Search() {
+    const [searchName, setsearchName] = useState("");
+
     const [minValueWorks, setMinValueWorks] = useState(2500);
     const [maxValueWorks, setMaxValueWorks] = useState(7500);
 
@@ -17,36 +50,50 @@ function Search() {
 
     const [selectedOptions, setSelectedOptions] = useState([]);
     
+    const [authors, setAuthors] = useState([]);
 
-    const MOCKDATA = [
-        {
-            name: "Name",
-            last_known_institutions: "Last Institution",
-            profileImg: "./profilePLaceholder.svg",
-            cited_by_count: 90,
-            works_count: 1,
-            id: 1
-        },
-        {
-            name: "Name",
-            last_known_institutions: "Last Institution",
-            profileImg: "./profilePLaceholder.svg",
-            cited_by_count: 90,
-            works_count: 10,
-            id: 2
-        }
-    ];
+    useEffect(() => {
+        searchFunction();
+    }, []);
 
-    const handleChange = (e) => {
-        e.preventDefault();
-        console.log({
-            minValueWorks,
-            maxValueWorks,
-            minValueCites,
-            maxValueCites,
-            selectedOptions
+    const searchFunction = async () => {
+        let data = await fetchAuthors(searchName);
+        
+        let tmp = []
+        data.forEach((author) => {
+            // if (author.works_count >= minValueWorks && author.works_count <= maxValueWorks &&
+            //     author.cited_by_count >= minValueCites && author.cited_by_count <= maxValueCites &&
+            //     (selectedOptions.length === 0 || selectedOptions.includes(author.hint))) {
+                
+                tmp.push({
+                        name: author.display_name,
+                        last_known_institutions: author.hint,
+                        profileImg: "./profilePLaceholder.svg",
+                        cited_by_count: author.cited_by_count,
+                        works_count: author.works_count,
+                        id: author.short_id.split("/").pop()
+                    })
+            // }
         });
+        setAuthors(tmp);
+    }
+
+    const handleChange = async (e) => {
+        const value = e.target.value;
+        setsearchName(value);
+        e.preventDefault();
+        searchFunction();
     };
+
+    const clearFilters = async (e) => {
+        setMinValueWorks(2500);
+        setMaxValueWorks(7500);
+        setMinValueCites(2500);
+        setMaxValueCites(7500);
+        setSelectedOptions([]);
+        e.preventDefault();
+        searchFunction();
+    }
 
     return (
         <div className="search-page">
@@ -95,13 +142,14 @@ function Search() {
                         />
                     </div>
 
-                    <div className="filter-item">
+                    <div className="filter-item form-buttons">
                         <button className="apply-btn" type="submit" onClick={handleChange}>Apply</button>
+                        <button className="apply-btn" type="submit" onClick={clearFilters}>Clean</button>
                     </div>
                 </form>
 
                 <div className="results">
-                    {MOCKDATA.map((data) => {
+                    {authors.map((data) => {
                         return <ResultCard data={data} key={data.id} />
                     })}
                 </div>

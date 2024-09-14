@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import Select from "react-select";
 
 // Function to fetch institutions from the API based on search input
-async function fetchInstitutions(searchInput = "", page = 1) {
+async function fetchInstitutions(searchInput = "") {
   try {
     let queryString = "";
     if (searchInput !== "") {
       queryString = `q=${searchInput.trim()}&`;
     }
+
     const response = await fetch(
-      `https://api.openalex.org/institutions?${queryString}page=${page}`
+      `https://api.openalex.org/autocomplete/institutions?${queryString}`
     );
     const data = await response.json();
     let dataToReturn = [];
@@ -33,34 +34,28 @@ async function fetchInstitutions(searchInput = "", page = 1) {
 export const MultiSelect = ({ selectedOptions, setSelectedOptions }) => {
   const [options, setOptions] = useState([]);
   const [inputValue, setInputValue] = useState("");
-  const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchOptions = async (searchInput, page) => {
     setIsLoading(true);
     const institutions = await fetchInstitutions(searchInput, page);
-    console.log(institutions);
-    setOptions((prevOptions) => {
-      return page === 1 ? institutions : [...prevOptions, ...institutions];
-    });
+    setOptions(institutions);
     setIsLoading(false);
   };
 
   const handleInputChange = (newInputValue) => {
     setInputValue(newInputValue);
     if (newInputValue) {
-      fetchOptions(newInputValue, 1);
+      fetchOptions(newInputValue);
     }
   };
 
   const loadMoreOptions = async () => {
-    const newPage = page + 1;
-    setPage(newPage);
-    await fetchOptions(inputValue, newPage);
+    await fetchOptions(inputValue);
   };
 
   useEffect(() => {
-    fetchOptions("", 1);
+    fetchOptions("");
   }, []);
 
   return (
@@ -69,7 +64,7 @@ export const MultiSelect = ({ selectedOptions, setSelectedOptions }) => {
         defaultValue={[]}
         isMulti
         options={options}
-        onInputChange={handleInputChange} 
+        onInputChange={handleInputChange}  // Fetch data on input change
         onChange={(item) => setSelectedOptions(item)}
         className="select"
         isClearable={true}
@@ -78,7 +73,8 @@ export const MultiSelect = ({ selectedOptions, setSelectedOptions }) => {
         isLoading={isLoading}
         isRtl={false}
         closeMenuOnSelect={false}
-        onMenuScrollToBottom={loadMoreOptions}
+        onMenuScrollToBottom={loadMoreOptions}  // Load more on scroll
+        filterOption={null}  // Disable internal filtering
       />
     </>
   );
