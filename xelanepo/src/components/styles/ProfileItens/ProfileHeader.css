@@ -1,0 +1,31 @@
+.profile-details{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: center; */
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+    gap: 20px;
+
+    & .profile-img{
+        margin: 0;
+        overflow: hidden;
+    }
+
+    & .profile-details-itens{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        & .profile-details-iten{
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+
+    & .profile-details-indicadores{
+        margin-left: 50%;
+    } 
+}
