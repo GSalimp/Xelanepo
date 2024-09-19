@@ -10,29 +10,25 @@ function ProfileHeader(){
         <div className="ProfileHeader profileItem">
             <span>ProfileHeader</span>
             <div className="profile-details">
-                <div className="profile-img">
-                    <img src="./profilePLaceholder.svg" alt="profilePLaceholder" />
+                <div className="profile-img-header">
+                    <img src="./profilePLaceholder.svg" alt="profilePlaceholder" />
                 </div>
                 <div className="profile-details-itens">
                     <div className="profile-details-iten">
                         <span className="iten-title">Name</span>
-                        <span className="iten-title">Mateus</span>
+                        <span className="iten-title">Tomiwa Oyeledu Dolapo</span>
                     </div>
                     <div className="profile-details-iten">
-                        <span className="iten-title">Name</span>
-                        <span className="iten-title">Mateus</span>
+                        <span className="iten-title">Gender</span>
+                        <span className="iten-title">Female</span>
                     </div>
                     <div className="profile-details-iten">
-                        <span className="iten-title">Name</span>
-                        <span className="iten-title">Mateus</span>
+                        <span className="iten-title">Date of Birth</span>
+                        <span className="iten-title">August 27th, 1999</span>
                     </div>
                     <div className="profile-details-iten">
-                        <span className="iten-title">Name</span>
-                        <span className="iten-title">Mateus</span>
-                    </div>
-                    <div className="profile-details-iten">
-                        <span className="iten-title">Name</span>
-                        <span className="iten-title">Mateus</span>
+                        <span className="iten-title">Nationality</span>
+                        <span className="iten-title">Nigerian</span>
                     </div>
                 </div>
 

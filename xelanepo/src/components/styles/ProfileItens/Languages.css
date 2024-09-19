@@ -1,0 +1,21 @@
+.Languages{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.languageChart {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;     /* Center vertically */
+    width: 100%;             /* Full width of the parent container */
+    height: 100%;            /* Full height of the parent container */
+}
+
+.languageChart > div > svg{
+    width: 100% !important;
+    height: 100% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
