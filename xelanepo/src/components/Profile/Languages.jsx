@@ -3,19 +3,27 @@ import * as d3 from "d3";
 
 import "./../styles/ProfileItens/Languages.css";
 
-const SunburstChart = ({ data, width = 400, radius = 100, color = d3.scaleOrdinal(d3.schemeCategory10) }) => {
+const SunburstChart = ({ data, width = 400, radius = 200, color = d3.scaleOrdinal(d3.schemeCategory10) }) => {
     const ref = useRef();
 
     useEffect(() => {
         d3.select(ref.current).select("svg").remove();
 
-        const partition = data => d3.partition()
+        if (!data || data.length === 0) return;
+
+        const rootData = {
+            name: "Languages",
+            children: data
+        };
+
+        const partition = (data) => d3.partition()
             .size([2 * Math.PI, radius * radius])
             (d3.hierarchy(data)
                 .sum(d => d.value)
                 .sort((a, b) => b.value - a.value));
 
-        const root = partition(data);
+        const root = partition(rootData);
+
         const svg = d3.select(ref.current).append("svg")
             .attr("viewBox", `${-radius} ${-radius} ${width} ${width}`)
             .style("max-width", `${width}px`)
@@ -78,34 +86,44 @@ const SunburstChart = ({ data, width = 400, radius = 100, color = d3.scaleOrdina
     return <div ref={ref}></div>;
 };
 
-function Languages() {
+function Languages({ id }) {
+    const [languages, setLanguages] = useState([]);
+
+    useEffect(() => {
+        async function fetchLanguages() {
+            try {
+                const request = await fetch(`https://api.openalex.org/works?group_by=language&per_page=200&filter=authorships.author.id:${id}`);
+                const requestData = await request.json();
+
+                let tmpList = [];
+                requestData.group_by.forEach(element => {
+                    tmpList.push({ name: element.key, value: element.count, children: [] });
+                });
+                setLanguages(tmpList);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        fetchLanguages();
+    }, [id]);
+
+    if (languages.length === 0)
+        return (
+            <div className="Languages profileItem">
+                <div className="loading">
+                    <span>Loading...</span>
+                </div>
+            </div>
+        );
+
     return (
         <div className="Languages profileItem">
             <span>Languages</span>
             <div className="languageChart">
-                <SunburstChart
-                    data={{
-                        name: "root",
-                        children: [
-                            {
-                                name: "Python",
-                                value: 10,
-                                children: [],
-                            },
-                            {
-                                name: "JavaScript",
-                                value: 10,
-                                children: [],
-                            },
-                            {
-                                name: "Java",
-                                value: 10,
-                                children: [],
-                            },
-                        ],
-                    }}
-                />
+                <SunburstChart data={languages} />
             </div>
+            {/* add legenda do lado do grafico mostrando total de artigos e as porcentagem e as cores */}
         </div>
     );
 }

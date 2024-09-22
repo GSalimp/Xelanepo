@@ -1,9 +1,10 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { GoogleMap, LoadScript, MarkerF } from '@react-google-maps/api';
 import "./../styles/ProfileItens/InstitutionsMap.css";
 
-const MapComponent = ({ markers }) => {
+const MapComponent = ({ markers, selectedPosition, targetZoom }) => {
     const mapRef = useRef(null);
+    const [currentZoom, setCurrentZoom] = useState(10);
 
     useEffect(() => {
         if (markers.length && mapRef.current) {
@@ -13,10 +14,29 @@ const MapComponent = ({ markers }) => {
         }
     }, [markers]);
 
+    useEffect(() => {
+        if (selectedPosition && mapRef.current) {
+            // Smoothly pan to the new position
+            mapRef.current.panTo(selectedPosition);
+
+            // Animate the zoom level change
+            const animateZoom = () => {
+                if (mapRef.current.getZoom() < targetZoom) {
+                    setTimeout(() => {
+                        mapRef.current.setZoom(mapRef.current.getZoom() + 1);
+                        animateZoom();
+                    }, 150); // Adjust this for smoother/faster animation
+                }
+            };
+            animateZoom();
+        }
+    }, [selectedPosition, targetZoom]);
+
     return (
         <LoadScript googleMapsApiKey="AIzaSyDu8mqAzl88lu18Vlrb51GeyFl3zh92NEg">
             <GoogleMap
-                mapContainerStyle={{ width: '900px', height: '400px' }}
+                mapContainerStyle={{ width: '900px', height: '300px' }}
+                zoom={currentZoom}
                 onLoad={map => {
                     mapRef.current = map;
                 }}
@@ -33,9 +53,9 @@ const MapComponent = ({ markers }) => {
     );
 };
 
-function InstitutionCard({ item }) {
+function InstitutionCard({ item, onClick }) {
     return (
-        <div className="institution-card">
+        <div className="institution-card" onClick={onClick}>
             <div className="years">
                 {item.years.map((year) => (
                     <span key={year}>{year}</span>
@@ -65,7 +85,14 @@ function InstitutionsMap() {
         }
     ];
 
-    // Extract marker positions from the data
+    const [selectedPosition, setSelectedPosition] = useState(null);
+    const [zoomLevel, setZoomLevel] = useState(10);
+
+    const handleCardClick = (position) => {
+        setSelectedPosition(position);
+        setZoomLevel(14); // Target zoom level
+    };
+
     const markers = data.map(item => item.position);
 
     return (
@@ -74,10 +101,14 @@ function InstitutionsMap() {
             <div className="cards-map">
                 <div className="institution-items">
                     {data.map((item) => (
-                        <InstitutionCard item={item} key={item.institution} />
+                        <InstitutionCard
+                            item={item}
+                            key={item.institution}
+                            onClick={() => handleCardClick(item.position)}
+                        />
                     ))}
                 </div>
-                <MapComponent markers={markers} />
+                <MapComponent markers={markers} selectedPosition={selectedPosition} targetZoom={zoomLevel} />
             </div>
         </div>
     );
