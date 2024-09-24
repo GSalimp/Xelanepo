@@ -12,14 +12,16 @@ function WorksGraph({id}) {
     const [worksPerYearOpen, setWorksPerYearOpen] = useState({});
     const [yearLabels, setYearLabels] = useState([]);
 
+    const [flag, setFlag] = useState(false);
+
     useEffect(() => {
         async function fetchWorksCount() {
             try {
 
-                const requestWorksPerYear = await fetch(`https://api.openalex.org/works?group_by=publication_year&per_page=200&filter=authorships.author.id:${id}`);
+                const requestWorksPerYear = await fetch(`https://api.openalex.org/works?group_by=publication_year&per_page=200&filter=authorships.author.id:${id}&sort=key`);
                 const requestWorksPerYearData = await requestWorksPerYear.json();
 
-                const requestWorksPerYearOpen = await fetch(`https://api.openalex.org/works?filter=is_oa:true,authorships.author.id:a5106322486&group_by=publication_year:${id}`);
+                const requestWorksPerYearOpen = await fetch(`https://api.openalex.org/works?filter=is_oa:true,authorships.author.id:${id}&group_by=publication_year&sort=key`);
                 const requestWorksPerYearOpenData = await requestWorksPerYearOpen.json();
                 
                 // check if the code of the request is 200
@@ -28,24 +30,31 @@ function WorksGraph({id}) {
                     return;
                 }
 
+                // Merge keys
+                const allYears = new Set([
+                    ...requestWorksPerYearData.group_by.map(entry => entry.key),
+                    ...requestWorksPerYearOpenData.group_by.map(entry => entry.key)
+                ]);
 
-                let tmpCountList = [];
-                requestWorksPerYearData.group_by.forEach(element => {
-                    tmpCountList.push(element.count);
+                // Create two lists, initializing them with 0
+                let list1 = [];
+                let list2 = [];
+                
+                // Iterate through all years and build the lists
+                allYears.forEach(year => {
+                    const entry1 = requestWorksPerYearData.group_by.find(entry => entry.key === year);
+                    const entry2 = requestWorksPerYearOpenData.group_by.find(entry => entry.key === year);
+                    
+                    // Add the count if year exists, else add 0
+                    list1.push(entry1 ? entry1.count : 0);
+                    list2.push(entry2 ? entry2.count : 0);
                 });
-                setWorksPerYear({count: tmpCountList, name: "Total"});
 
-                tmpCountList = [];
-                requestWorksPerYearOpenData.group_by.forEach(element => {
-                    tmpCountList.push(element.count);
-                });
-                setWorksPerYearOpen({count: tmpCountList, name: "Open"});
+                setWorksPerYear({data: list1, name: "Total"});
+                setWorksPerYearOpen({data: list2, name: "Open"});
+                setYearLabels(Array.from(allYears));
 
-                let tmpYearLabels = [];
-                requestWorksPerYearData.group_by.forEach(element => {
-                    tmpYearLabels.push(element.key);
-                });
-                setYearLabels(tmpYearLabels);
+                setFlag(true);
 
             } catch (error) {
                 console.error(error);
@@ -54,23 +63,10 @@ function WorksGraph({id}) {
         fetchWorksCount();
     }, [id]);
 
-    // const seriesData = [
-    //     {
-    //         name: "Abertos",
-    //         data: [28, 29, 33, 36, 32, 32, 33]
-    //     },
-    //     {
-    //         name: "Total",
-    //         data: [12, 11, 14, 18, 17, 13, 13]
-    //     }
-    // ];
-
-    // const categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
-
     const xAxisLabel = 'Numero de Trabalhos';
     const yAxisLabel = 'Anos';
 
-    if ((worksPerYear.length === 0  || worksPerYearOpen.length === 0) && !(worksPerYear || worksPerYearOpen))
+    if (flag === false)
         return (
             <div className="WorksGraph profileItem">
                 <div className="loading">

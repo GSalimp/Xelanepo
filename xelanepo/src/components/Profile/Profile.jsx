@@ -10,7 +10,6 @@ import { WorksGraph } from "./WorksGraph";
 import { InstitutionsMap } from "./InstitutionsMap";
 
 import "./../styles/Profile.css";
-import { image } from "d3";
 
 function Profile(){
     const { id } = useParams();  
@@ -27,9 +26,9 @@ function Profile(){
                 const outhorData = await authorRequest.json();
                 setAuthor(outhorData);
 
-                const workdsRequest = await fetch(outhorData.works_api_url);
-                const workdsData = await workdsRequest.json();
-                setWorks(workdsData);
+                // const workdsRequest = await fetch(outhorData.works_api_url);
+                // const workdsData = await workdsRequest.json();
+                // setWorks(workdsData);
 
                 setPersonalInfo({
                     name: outhorData.display_name,

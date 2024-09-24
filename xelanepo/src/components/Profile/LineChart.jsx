@@ -2,6 +2,22 @@ import React from 'react';
 import ReactApexChart from 'react-apexcharts';
 
 const LineChart = ({ series, categories, xAxisLabel, yAxisLabel }) => {
+  // console.log(series);
+
+  //get the min and max value of the series
+  let min = 500000;
+  let max = 0;
+  series.forEach(serie => {
+    serie.data.forEach(value => {
+      if (value < min) {
+        min = value;
+      }
+      if (value > max) {
+        max = value;
+      }
+    });
+  })
+
   const options = {
     chart: {
       height: 350,
@@ -49,8 +65,8 @@ const LineChart = ({ series, categories, xAxisLabel, yAxisLabel }) => {
       title: {
         text: yAxisLabel
       },
-      min: 5,
-      max: 40
+      min: min,
+      max: max
     },
     legend: {
       position: 'top',
