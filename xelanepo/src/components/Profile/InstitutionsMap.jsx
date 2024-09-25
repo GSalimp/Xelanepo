@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useState, useEffect, useRef } from 'react';
 import { GoogleMap, LoadScript, MarkerF } from '@react-google-maps/api';
 import "./../styles/ProfileItens/InstitutionsMap.css";
 
@@ -16,16 +16,13 @@ const MapComponent = ({ markers, selectedPosition, targetZoom }) => {
 
     useEffect(() => {
         if (selectedPosition && mapRef.current) {
-            // Smoothly pan to the new position
             mapRef.current.panTo(selectedPosition);
-
-            // Animate the zoom level change
             const animateZoom = () => {
                 if (mapRef.current.getZoom() < targetZoom) {
                     setTimeout(() => {
                         mapRef.current.setZoom(mapRef.current.getZoom() + 1);
                         animateZoom();
-                    }, 150); // Adjust this for smoother/faster animation
+                    }, 150);
                 }
             };
             animateZoom();
@@ -66,44 +63,84 @@ function InstitutionCard({ item, onClick }) {
     );
 }
 
-function InstitutionsMap() {
-    const data = [
-        {
-            institution: "USP",
-            years: [2012, 2013, 2014, 2015, 2016, 2017, 2018],
-            position: { lat: -3.745, lng: -38.523 }
-        },
-        {
-            institution: "UNICAMP",
-            years: [2012, 2013, 2014, 2015, 2016, 2017, 2018],
-            position: { lat: -3.755, lng: -38.533 }
-        },
-        {
-            institution: "UNESP",
-            years: [2012, 2013, 2014, 2015, 2016, 2017, 2018],
-            position: { lat: 0, lng: 0 }
-        }
-    ];
-
+function InstitutionsMap({ id }) {
+    const [data, setData] = useState([]);
     const [selectedPosition, setSelectedPosition] = useState(null);
     const [zoomLevel, setZoomLevel] = useState(10);
 
+    useEffect(() => {
+        const fetchInstitutions = async () => {
+            try {
+                await new Promise(r => setTimeout(r, 1000));
+
+                const request = await fetch(`https://api.openalex.org/authors/${id}`);
+                const requestData = await request.json();
+                
+                const tmpData = {};
+
+                const institutionIDList = [];
+                requestData.affiliations.forEach(affiliation => {
+                    institutionIDList.push(affiliation.institution.id);
+                    tmpData[affiliation.institution.display_name] = {
+                        institution: affiliation.institution.display_name,
+                        years: affiliation.years,
+                        position: undefined
+                    };
+                });
+
+                await new Promise(r => setTimeout(r, 1000));
+
+                const institutionsRequest = await fetch(`https://api.openalex.org/institutions?filter=id:${institutionIDList.join("|")}`);
+                const institutionsData = await institutionsRequest.json();
+                const institutions = institutionsData.results;
+
+                // Use functional state update to ensure correct state
+                setData(prevData => {
+                    institutions.forEach(institution => {
+                        if (tmpData[institution.display_name]) {
+                            tmpData[institution.display_name].position = {
+                                lat: institution.geo.latitude,
+                                lng: institution.geo.longitude
+                            };
+                            prevData.push(tmpData[institution.display_name]);
+                        }
+                    });
+                    return [...prevData]; // Return a new array
+                });
+
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        fetchInstitutions();
+    }, [id]); // Run this effect when the `id` changes
+
+    if (!data.length) {
+        return (
+            <div className="InstitutionsMap profileItem">
+                <span>InstitutionsMap</span>
+                <div>Loading...</div>
+            </div>
+        );
+    }
+
     const handleCardClick = (position) => {
         setSelectedPosition(position);
-        setZoomLevel(14); // Target zoom level
+        setZoomLevel(14);
     };
 
-    const markers = data.map(item => item.position);
+    const markers = data.map(item => item.position).filter(position => position); // Filter out undefined positions
 
     return (
         <div className="InstitutionsMap profileItem">
             <span>InstitutionsMap</span>
             <div className="cards-map">
                 <div className="institution-items">
-                    {data.map((item) => (
+                    {data.map((item, index) => (
                         <InstitutionCard
                             item={item}
-                            key={item.institution}
+                            key={`${item.institution}-${index}`} // Adjusted key
                             onClick={() => handleCardClick(item.position)}
                         />
                     ))}
@@ -112,6 +149,7 @@ function InstitutionsMap() {
             </div>
         </div>
     );
+    
 }
 
 export { InstitutionsMap };

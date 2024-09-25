@@ -17,13 +17,16 @@ function WorksGraph({id}) {
     useEffect(() => {
         async function fetchWorksCount() {
             try {
-
+                await new Promise(r => setTimeout(r, 1000));
+                
                 const requestWorksPerYear = await fetch(`https://api.openalex.org/works?group_by=publication_year&per_page=200&filter=authorships.author.id:${id}&sort=key`);
                 const requestWorksPerYearData = await requestWorksPerYear.json();
 
+                await new Promise(r => setTimeout(r, 1000));
+
                 const requestWorksPerYearOpen = await fetch(`https://api.openalex.org/works?filter=is_oa:true,authorships.author.id:${id}&group_by=publication_year&sort=key`);
                 const requestWorksPerYearOpenData = await requestWorksPerYearOpen.json();
-                
+
                 // check if the code of the request is 200
                 if (requestWorksPerYear.status !== 200 || requestWorksPerYearOpen.status !== 200) {
                     console.error("Error fetching data");
@@ -55,6 +58,9 @@ function WorksGraph({id}) {
                 setYearLabels(Array.from(allYears));
 
                 setFlag(true);
+                // console.log(worksPerYear)
+                // console.log(worksPerYearOpen)
+            
 
             } catch (error) {
                 console.error(error);

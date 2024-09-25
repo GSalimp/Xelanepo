@@ -13,6 +13,7 @@ import "./../styles/Profile.css";
 
 function Profile(){
     const { id } = useParams();  
+    // const id = "A5058053632"; 
     const [author, setAuthor] = useState({});
     const [works, setWorks] = useState([]);
     const [personalInfo, setPersonalInfo] = useState({});
@@ -25,10 +26,12 @@ function Profile(){
                 const authorRequest = await fetch(`https://api.openalex.org/authors/${id}`);
                 const outhorData = await authorRequest.json();
                 setAuthor(outhorData);
-
-                // const workdsRequest = await fetch(outhorData.works_api_url);
-                // const workdsData = await workdsRequest.json();
-                // setWorks(workdsData);
+                
+                //wait 5 seconds to make another request
+                await new Promise(r => setTimeout(r, 1000));
+                const workdsRequest = await fetch(outhorData.works_api_url);
+                const workdsData = await workdsRequest.json();
+                setWorks(workdsData);
 
                 setPersonalInfo({
                     name: outhorData.display_name,
@@ -50,6 +53,15 @@ function Profile(){
         featchAuthor();
     }, [])
 
+    if (Object.keys(author).length === 0)
+        return (
+            <div className="profile-page">
+                <div className="loading">
+                    <span>Loading...</span>
+                </div>
+            </div>
+        );
+
     return (
         <div className="profile-page">
             <h1>Profile</h1>
@@ -58,9 +70,9 @@ function Profile(){
                 <Works works={works}/>
                 <Languages id={id}/>
                 <Topics id={id}/>
-                <CitationsGraph id={id}/>
+                <CitationsGraph counts_by_year={author.counts_by_year}/>
                 <WorksGraph id={id}/>
-                {/* <InstitutionsMap /> */}
+                <InstitutionsMap id={id}/>
             </div>
         </div>
     )

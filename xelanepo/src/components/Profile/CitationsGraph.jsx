@@ -1,31 +1,47 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 import { LineChart } from "./LineChart";
 
-function CitationsGraph() {
-    // const { id } = useParams();  
-    const seriesData = [
-        {
-            name: "Abertos",
-            data: [28, 29, 33, 36, 32, 32, 33]
-        },
-        {
-            name: "Total",
-            data: [12, 11, 14, 18, 17, 13, 13]
-        }
-    ];
+// https://api.openalex.org/works?group_by=publication_year&per_page=200&filter=authorships.author.id:a5106322486 = WORKs Per Year
+// https://api.openalex.org/works?filter=is_oa:true,authorships.author.id:a5106322486&group_by=publication_year = WORKs Per Year Open Access
 
-    const categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
-    const xAxisLabel = 'Numero de Trabalhos';
+function CitationsGraph({ counts_by_year }) {
+    // const { id } = useParams();  
+    const [citationsPerYear, setCitationsPerYear] = useState({});
+    const [yearLabels, setYearLabels] = useState([]);
+    const [flag, setFlag] = useState(false);
+
+    useEffect(() => {
+        let tmpYear = []
+        let tmpCitations = []
+        counts_by_year.forEach(element => {
+            tmpYear.push(element.year)
+            tmpCitations.push(element.cited_by_count)
+        });
+        setYearLabels(tmpYear)
+        setCitationsPerYear({data: tmpCitations, name: "Citações"})
+        setFlag(true)
+    },[counts_by_year])
+
+    if (!flag) {
+        return (
+            <div className="WorksGraph profileItem">
+                <span>WorksGraph</span>
+                <p>Loading...</p>
+            </div>
+        )
+    }
+
+    const xAxisLabel = 'Numero de Citações';
     const yAxisLabel = 'Anos';
 
     return (
         <div className="WorksGraph profileItem">
             <span>WorksGraph</span>
             <LineChart
-                series={seriesData}
-                categories={categories}
+                series={[citationsPerYear]}
+                categories={yearLabels}
                 xAxisLabel={xAxisLabel}
                 yAxisLabel={yAxisLabel}
             />

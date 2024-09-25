@@ -2,9 +2,9 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import "./../styles/ProfileItens/Works.css";
 
-function workCard(work) {
-      return (
-    <a className="work-card-a" href={work.doi} key={work.id}>
+function workCard(work, index) {
+  return (
+    <a className="work-card-a" href={work.doi} key={`${work.doi}-${index}`}>
       <div className="work-card">
         <div className="tag">{work.topics[0]?.display_name}</div>
         <div className="title">{work.title}</div>
@@ -30,7 +30,7 @@ function Works({ works }) {
     <div className="works profileItem">
       <span>Works</span>
       <div className="work-itens">
-        {works.results.map((work) => workCard(work))}
+        {works.results.map((work, index) => workCard(work, index))}
       </div>
     </div>
   );
