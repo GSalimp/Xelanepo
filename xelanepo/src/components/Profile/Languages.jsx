@@ -43,10 +43,11 @@ const SunburstChart = ({ data, width = 400, radius = 200, color = d3.scaleOrdina
             .text("");
 
         label.append("tspan")
+            .attr("class", "language-name")
             .attr("x", 0)
             .attr("y", 0)
             .attr("dy", "1.5em")
-            .text("of visits begin with this sequence");
+            .text("");
 
         const arc = d3.arc()
             .startAngle(d => d.x0)
@@ -78,12 +79,40 @@ const SunburstChart = ({ data, width = 400, radius = 200, color = d3.scaleOrdina
                 const sequence = d.ancestors().reverse().slice(1);
                 path.attr("fill-opacity", node => (sequence.indexOf(node) >= 0 ? 1.0 : 0.3));
                 const percentage = ((100 * d.value) / root.value).toPrecision(3);
-                label.style("visibility", null).select(".percentage").text(percentage + "%");
+                label.style("visibility", null)
+                    .select(".percentage").text(percentage + "%");
+                label.select(".language-name").text(d.data.name);
             });
 
     }, [data, radius, width, color]);
 
     return <div ref={ref}></div>;
+};
+
+const Legend = ({ languages }) => {
+    if (languages.length === 0) return null;
+
+    const total = languages.reduce((sum, lang) => sum + lang.value, 0);
+    const reducedLanguages = languages.filter(lang => lang.value > 0);
+
+    return (
+        <div className="legend">
+            {reducedLanguages.map((lang, index) => {
+                const percentage = ((lang.value / total) * 100).toFixed(2);
+                return (
+                    <div key={index} className="legend-item">
+                        <span
+                            className="legend-color"
+                            style={{ backgroundColor: lang.color }}
+                        ></span>
+                        <span className="legend-name">{lang.name}</span>
+                        <span className="legend-count">{lang.value} articles</span>
+                        <span className="legend-percentage">({percentage}%)</span>
+                    </div>
+                );
+            })}
+        </div>
+    );
 };
 
 function Languages({ id }) {
@@ -96,8 +125,12 @@ function Languages({ id }) {
                 const requestData = await request.json();
 
                 let tmpList = [];
-                requestData.group_by.forEach(element => {
-                    tmpList.push({ name: element.key, value: element.count, children: [] });
+                requestData.group_by.forEach((element, index) => {
+                    tmpList.push({ 
+                        name: element.key_display_name, 
+                        value: element.count, 
+                        color: d3.schemeCategory10[index % 10]  // Assign colors dynamically
+                    });
                 });
                 setLanguages(tmpList);
             } catch (error) {
@@ -108,7 +141,7 @@ function Languages({ id }) {
         fetchLanguages();
     }, [id]);
 
-    if (languages.length === 0)
+    if (languages.length === 0 || languages.every(lang => lang.value === 0))
         return (
             <div className="Languages profileItem">
                 <div className="loading">
@@ -122,8 +155,8 @@ function Languages({ id }) {
             <span>Languages</span>
             <div className="languageChart">
                 <SunburstChart data={languages} />
+                <Legend languages={languages} />
             </div>
-            {/* add legenda do lado do grafico mostrando total de artigos e as porcentagem e as cores */}
         </div>
     );
 }

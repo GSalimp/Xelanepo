@@ -69,8 +69,8 @@ function WorksGraph({id}) {
         fetchWorksCount();
     }, [id]);
 
-    const xAxisLabel = 'Numero de Trabalhos';
-    const yAxisLabel = 'Anos';
+    const yAxisLabel = 'Numero de Trabalhos';
+    const xAxisLabel = 'Anos';
 
     if (flag === false)
         return (

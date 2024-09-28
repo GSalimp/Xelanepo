@@ -22,7 +22,7 @@ To run this project locally:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/xelanepo.git
+   git clone https://github.com/GSalimp/xelanepo.git
 
 2. Navigate to the project directory:
    ```bash
@@ -51,8 +51,8 @@ To run this project locally:
 - Fazer uma paginação via scroll. Explicação: A request da api tem dois parâmetros: per_page e page, o ideal é não pegar todos os itens de uma vez e sim ir pegando por página, então tem q ser feito uma detecção de quando o usuário chegar no fim do scroll trabalhos e fazer outro request com o parâmetro page incrementado de 1 unidade. Segue a documentação: https://docs.openalex.org/api-entities/works/get-lists-of-works#page-and-sort-works
 
 ### Languages
-- Ainda não consegui fazer com que o hoover mostre a qual língua aquela porcentagem se refere. 
-- Seria Interessante ter um div do lado do gráfico listando as línguas, com a cor e porcentagem correspondente. Tipo [isso](https://cdn1.byjus.com/wp-content/uploads/2021/11/Pie-Chart-3.png) so que com as porcentagens também.
+- ~~ Ainda não consegui fazer com que o hoover mostre a qual língua aquela porcentagem se refere. ~~
+- ~~- Seria Interessante ter um div do lado do gráfico listando as línguas, com a cor e porcentagem correspondente. Tipo [isso](https://cdn1.byjus.com/wp-content/uploads/2021/11/Pie-Chart-3.png) so que com as porcentagens também.~~ --> Feito, mas tem que arrumar o CSS, GPT não mandou muito bem
 
 ### InstitutionsMap
 - Melhorar o estilo

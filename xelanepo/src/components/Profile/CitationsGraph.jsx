@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 
 import { LineChart } from "./LineChart";
 
@@ -33,15 +32,15 @@ function CitationsGraph({ counts_by_year }) {
         )
     }
 
-    const xAxisLabel = 'Numero de Citações';
-    const yAxisLabel = 'Anos';
+    const yAxisLabel = 'Numero de Citações';
+    const xAxisLabel = 'Anos';
 
     return (
         <div className="WorksGraph profileItem">
             <span>WorksGraph</span>
             <LineChart
-                series={[citationsPerYear]}
-                categories={yearLabels}
+                series={[{ ...citationsPerYear, data: citationsPerYear.data.slice().reverse() }]}
+                categories={yearLabels.slice().reverse()}
                 xAxisLabel={xAxisLabel}
                 yAxisLabel={yAxisLabel}
             />
