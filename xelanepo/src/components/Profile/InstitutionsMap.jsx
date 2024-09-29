@@ -119,7 +119,7 @@ function InstitutionsMap({ id }) {
     if (!data.length) {
         return (
             <div className="InstitutionsMap profileItem">
-                <span>InstitutionsMap</span>
+                <span className="profileItemTitle">Institutions Map</span>
                 <div>Loading...</div>
             </div>
         );
@@ -134,7 +134,7 @@ function InstitutionsMap({ id }) {
 
     return (
         <div className="InstitutionsMap profileItem">
-            <span>InstitutionsMap</span>
+            <span className="profileItemTitle">Institutions Map</span>
             <div className="cards-map">
                 <div className="institution-items">
                     {data.map((item, index) => (

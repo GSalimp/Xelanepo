@@ -75,15 +75,14 @@ function WorksGraph({id}) {
     if (flag === false)
         return (
             <div className="WorksGraph profileItem">
-                <div className="loading">
-                    <span>Loading...</span>
-                </div>
+                <span className="profileItemTitle">Work Graph</span>
+                <div className="loading"></div>
             </div>
         );
 
     return (
         <div className="WorksGraph profileItem">
-            <span>WorksGraph</span>
+            <span className="profileItemTitle">Work Graph</span>
             <LineChart
                 series={[worksPerYear, worksPerYearOpen]}
                 categories={yearLabels}

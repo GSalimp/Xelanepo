@@ -25,12 +25,13 @@
     margin: 10px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
     transition: transform 0.3s; 
-    max-width: 50%;
+    max-width: 100%;
+    cursor: pointer;
 }
 
-/* .institution-card:hover {
-    transform: scale(1.05);
-} */
+.institution-card:hover {
+    transform: scale(1.01);
+}
 
 .years {
     display: flex;

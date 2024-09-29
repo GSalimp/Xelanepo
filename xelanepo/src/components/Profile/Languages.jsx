@@ -32,14 +32,15 @@ const SunburstChart = ({ data, width = 400, radius = 200, color = d3.scaleOrdina
         const label = svg.append("text")
             .attr("text-anchor", "middle")
             .attr("fill", "#888")
-            .style("visibility", "hidden");
+            .style("visibility", "hidden")
+            .attr("font-size", "40px")
 
         label.append("tspan")
             .attr("class", "percentage")
             .attr("x", 0)
             .attr("y", 0)
             .attr("dy", "-0.1em")
-            .attr("font-size", "3em")
+            .attr("font-size", "40px")
             .text("");
 
         label.append("tspan")
@@ -144,15 +145,14 @@ function Languages({ id }) {
     if (languages.length === 0 || languages.every(lang => lang.value === 0))
         return (
             <div className="Languages profileItem">
-                <div className="loading">
-                    <span>Loading...</span>
-                </div>
+                <span className="profileItemTitle">Languages</span>
+                <div className="loading"></div>
             </div>
         );
 
     return (
         <div className="Languages profileItem">
-            <span>Languages</span>
+            <span className="profileItemTitle">Languages</span>
             <div className="languageChart">
                 <SunburstChart data={languages} />
                 <Legend languages={languages} />

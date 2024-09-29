@@ -13,16 +13,16 @@ const Footer = () => (
     </nav>
     <div className="social-icons">
       <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
-        <img src="facebook.png" alt="Facebook" />
+        <img src="/facebook.png" alt="Facebook" />
       </a>
       <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
-        <img src="instagram.png" alt="Instagram" />
+        <img src="/instagram.png" alt="Instagram" />
       </a>
       <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer">
-        <img src="linkedin.png" alt="LinkedIn" />
+        <img src="/linkedin.png" alt="LinkedIn" />
       </a>
       <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">
-        <img src="youtube.png" alt="Twitter" />
+        <img src="/youtube.png" alt="Youtube" />
       </a>
     </div>
 

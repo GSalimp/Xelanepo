@@ -36,29 +36,49 @@ To run this project locally:
    ```bash
     npm run dev
 
+## ENUNCIADO
+
+Projeto Final - Apresentação em 07/10/24
+Desenvolver uma página responsiva que mostra alguns dados da produção científica de um cientista, obtidos a partir da OpenAlex (https://openalex.org/). 
+Os dados que devem ser mostrados dizem respeito a:
+
+-~~Número de artigos publicados~~
+-~~Instituição onde a pessoa trabalha atualmente e já trabalhou antes~~
+-~~Índices~~
+-~~Tópicos mais abordados pelo cientista nos artigos~~
+-Quais são os colaboradores desse cientista (coautores nos artigos)
+-Quais desses coautores são mais frequentes.
+-~~Quais são os artigos mais importantes (mais citados)~~
+
+Usem a criatividade para mostrar esses dados de forma interessante e, se possível, interativa (clicar nos co-autores, voltar ao autor anterior, arrastar, etc, etc).
+Olha só o que o próprio site da OpenAlex traz, para se inspirarem: https://openalex.org/works?page=1&filter=authorships.author.id%3Aa5058053632
+O projeto poderá ser feito em dupla.
+No dia 07/10/24 todas as duplas irão fazer uma apresentação de 5 a 10 minutos sobre seus projetos, mostrando o resultado final, como interagir com a página, mencionando quais tecnologias foram utilizadas e outros detalhes que acharem pertinente. Não é preciso utilizar slides.
+A entrega pode ser feita a partir do link do repositório (github) ou com os arquivos todos em um zip.
+Coloque o nome dos integrantes da dupla. Apenas 1 integrante da dupla deve entregar, que eu contabilizo a nota para os dois.
+Prazo: 07/10/24
+Bom trabalho para vocês!
+
 ## TODO
 
 ### Pesquisa
-- Lembro que estava com problema, mas não lembro mais oque.
+- Usar o authors?filter ao inves do autocomplete
+- https://docs.openalex.org/api-entities/authors/search-authors
 
 ### ProfileHeader
-- Estilização Geral 
 - Pegar os dados de algum lugar = Provavelmente não vamos fazer por ser muito complicado e não ter muito tempo. Mas pode tentar se quiser
-- image:  "./profilePLaceholder.svg" não está funcionando na página Profile, apesar de funcionar na página de pesquisa
-- Acho que todas as imagens do diretório público estão cagadas nessa pagina 
 
 ### Works
+- Eu so mudei o request de lugar (Do Profile.jsx pro Works.jsx)
+- Ordenar por numero de citações
 - Fazer uma paginação via scroll. Explicação: A request da api tem dois parâmetros: per_page e page, o ideal é não pegar todos os itens de uma vez e sim ir pegando por página, então tem q ser feito uma detecção de quando o usuário chegar no fim do scroll trabalhos e fazer outro request com o parâmetro page incrementado de 1 unidade. Segue a documentação: https://docs.openalex.org/api-entities/works/get-lists-of-works#page-and-sort-works
 
 ### Languages
-- ~~ Ainda não consegui fazer com que o hoover mostre a qual língua aquela porcentagem se refere. ~~
-- ~~- Seria Interessante ter um div do lado do gráfico listando as línguas, com a cor e porcentagem correspondente. Tipo [isso](https://cdn1.byjus.com/wp-content/uploads/2021/11/Pie-Chart-3.png) so que com as porcentagens também.~~ --> Feito, mas tem que arrumar o CSS, GPT não mandou muito bem
-
-### InstitutionsMap
-- Melhorar o estilo
-- A div com os cardas não esta estendendo por completo
+- Arrumar o CSS, GPT não mandou muito bem = Pra mim ficou bom, so o mobile que ta quebrado 
 
 ### Mobile
 - Tem que fazer. Vai ser bem chato. Home, Pesquisa e Perfil 
--  Tem uma cacetada de warning no console, não sei como resolver
 
+### Outros
+- Tem uma cacetada de warning no console, não sei como resolver
+- Parte de coautores (do enunciado) não esta feita = Precisa fazer?

@@ -26,8 +26,8 @@ function CitationsGraph({ counts_by_year }) {
     if (!flag) {
         return (
             <div className="WorksGraph profileItem">
-                <span>WorksGraph</span>
-                <p>Loading...</p>
+                <span className="profileItemTitle">Citations Graph</span>
+                <div className="loading"></div>
             </div>
         )
     }
@@ -37,7 +37,7 @@ function CitationsGraph({ counts_by_year }) {
 
     return (
         <div className="WorksGraph profileItem">
-            <span>WorksGraph</span>
+            <span className="profileItemTitle">Citations Graph</span>
             <LineChart
                 series={[{ ...citationsPerYear, data: citationsPerYear.data.slice().reverse() }]}
                 categories={yearLabels.slice().reverse()}

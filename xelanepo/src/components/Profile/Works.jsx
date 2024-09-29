@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import "./../styles/ProfileItens/Works.css";
 
@@ -11,24 +11,44 @@ function workCard(work, index) {
         <div className="subtitle">
           {work.type} - {work.publication_year} - {work.open_access?.is_oa ? "Open Access" : "Closed Access"}
         </div>
+        <div className="citation">Cited by: {work.cited_by_count}</div> {/* Added citation count */}
       </div>
     </a>
   );
 }
 
-function Works({ works }) {
-  if (works.length === 0)
+function Works({ worksApiUrl }) {
+  const [works, setWorks] = useState([]);
+
+  useEffect(() => {
+    async function fetchWorks() {
+      try {
+        console.log("worksApiUrl", worksApiUrl)
+        const worksRequest = await fetch(worksApiUrl);
+        const worksData = await worksRequest.json();
+        setWorks(worksData);
+        console.log("worksData", worksData)
+      } 
+      catch (error) {
+        console.error(error);
+      }
+    }
+    fetchWorks();
+  },[])
+
+  if (works.length === 0 || worksApiUrl === "")
     return (
       <div className="works profileItem">
-        <div className="loading">
-          <span>Loading...</span>
-        </div>
+        <span className="profileItemTitle">Works</span>
+        <div className="loading"></div>
       </div>
     );
 
+  // console.log(works);
+
   return (
     <div className="works profileItem">
-      <span>Works</span>
+      <span className="profileItemTitle">Works</span>
       <div className="work-itens">
         {works.results.map((work, index) => workCard(work, index))}
       </div>

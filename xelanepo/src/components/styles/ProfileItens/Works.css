@@ -17,6 +17,11 @@
     scrollbar-width: none;
 }
 
+.work-card:hover {
+    transform: scale(1.01);
+}
+
+
 .work-card {
     width: 100%;
     padding: 15px;
@@ -24,6 +29,7 @@
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: box-shadow 0.3s ease-in-out;
+    transition: transform 0.3s; 
 
     & .card:hover {
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
@@ -47,6 +53,12 @@
         font-size: 14px;
         color: #555;
         margin-top: 4px;
+    }
+
+    & .citation {
+        font-size: 12px;
+        color: #777;
+        margin-top: 6px;
     }
 }
 

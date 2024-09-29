@@ -35,15 +35,14 @@ function Topics({id}){
     if (topics.length === 0)
         return (
           <div className="Topics profileItem">
-            <div className="loading">
-              <span>Loading...</span>
-            </div>
+            <span className="profileItemTitle">Topics</span>
+            <div className="loading"></div>
           </div>
         );
 
     return (
         <div className="Topics profileItem">
-            <span>Topics</span>
+            <span className="profileItemTitle">Topics</span>
             <div className="topics-itens">
                 {topics.map((topic) => TopicsCard(topic))}
             </div>
