@@ -20,12 +20,14 @@ async function fetchInstitutions(searchInput = "") {
     }
 
     data.results.forEach((item) => {
-      dataToReturn.push({ value: item.id, label: item.display_name });
+      dataToReturn.push({
+        value: item.id.split("/").pop(),
+        label: item.display_name,
+      });
     });
 
     return dataToReturn;
-  } 
-  catch (error) {
+  } catch (error) {
     console.error(error);
     return [];
   }
@@ -36,9 +38,9 @@ export const MultiSelect = ({ selectedOptions, setSelectedOptions }) => {
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
-  const fetchOptions = async (searchInput, page) => {
+  const fetchOptions = async (searchInput) => {
     setIsLoading(true);
-    const institutions = await fetchInstitutions(searchInput, page);
+    const institutions = await fetchInstitutions(searchInput);
     setOptions(institutions);
     setIsLoading(false);
   };
@@ -61,10 +63,10 @@ export const MultiSelect = ({ selectedOptions, setSelectedOptions }) => {
   return (
     <>
       <Select
-        defaultValue={[]}
+        value={selectedOptions} // Bind value to selectedOptions state
         isMulti
         options={options}
-        onInputChange={handleInputChange}  // Fetch data on input change
+        onInputChange={handleInputChange} // Fetch data on input change
         onChange={(item) => setSelectedOptions(item)}
         className="select"
         isClearable={true}
@@ -73,8 +75,8 @@ export const MultiSelect = ({ selectedOptions, setSelectedOptions }) => {
         isLoading={isLoading}
         isRtl={false}
         closeMenuOnSelect={false}
-        onMenuScrollToBottom={loadMoreOptions}  // Load more on scroll
-        filterOption={null}  // Disable internal filtering
+        onMenuScrollToBottom={loadMoreOptions} // Load more on scroll
+        filterOption={null} // Disable internal filtering
       />
     </>
   );

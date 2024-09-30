@@ -120,7 +120,7 @@ function InstitutionsMap({ id }) {
         return (
             <div className="InstitutionsMap profileItem">
                 <span className="profileItemTitle">Institutions Map</span>
-                <div>Loading...</div>
+                <div className="loading"></div>
             </div>
         );
     }

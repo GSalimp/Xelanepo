@@ -106,3 +106,28 @@ body {
 .apply-btn:hover {
     background-color: #0056b3;
 }
+
+.results-loading{
+    margin: auto auto;
+}
+
+/* @media (max-width: 768px) {
+    .filter {
+        display: none;
+    }
+
+    .filter-icon {
+        display: inline-block;
+        cursor: pointer;
+    }
+}
+
+@media (min-width: 769px) {
+    .filter-icon {
+        display: none;
+    }
+
+    .filter {
+        display: block;
+    }
+} */

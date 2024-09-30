@@ -25,7 +25,7 @@ function Works({ worksApiUrl }) {
     async function fetchWorks() {
       try {
         setLoading(true);
-        const worksRequest = await fetch(worksApiUrl + `&per_page=10&page=${page}`);
+        const worksRequest = await fetch(worksApiUrl + `&per_page=10&page=${page}&sort=cited_by_count:desc`);
         const worksData = await worksRequest.json();
         setWorks((prevWorks) => [...prevWorks, ...worksData.results]);
         setLoading(false);

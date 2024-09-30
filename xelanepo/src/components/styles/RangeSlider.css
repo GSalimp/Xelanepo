@@ -9,6 +9,7 @@
 .wrapper{
   width: 400px;
   border-radius: 10px;
+  padding-top: 10px;
 }
 
 header h2{

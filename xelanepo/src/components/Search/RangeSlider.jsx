@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./../styles/RangeSlider.css"; // Assuming CSS is stored in a separate file
+import "./../styles/RangeSlider.css";
 
 function RangeSlider({minValue, setMinValue, maxValue, setMaxValue, valueGap}) {
   useEffect(() => {
@@ -20,7 +20,7 @@ function RangeSlider({minValue, setMinValue, maxValue, setMaxValue, valueGap}) {
 
   const handleMaxInputChange = (e) => {
     const value = parseInt(e.target.value);
-    if (value <= 10000 && value >= minValue + valueGap) {
+    if (value <= 100000 && value >= minValue + valueGap) {
       setMaxValue(value);
     }
   };
@@ -40,8 +40,8 @@ function RangeSlider({minValue, setMinValue, maxValue, setMaxValue, valueGap}) {
         <div
           className="progress"
           style={{
-            left: `${(minValue / 10000) * 100}%`,
-            right: `${100 - (maxValue / 10000) * 100}%`,
+            left: `${(minValue / 100000) * 100}%`,
+            right: `${100 - (maxValue / 100000) * 100}%`,
           }}
         ></div>
       </div>
@@ -50,7 +50,7 @@ function RangeSlider({minValue, setMinValue, maxValue, setMaxValue, valueGap}) {
           type="range"
           className="range-min"
           min="0"
-          max="10000"
+          max="100000"
           value={minValue}
           step="100"
           onChange={handleRangeChange}
@@ -59,7 +59,7 @@ function RangeSlider({minValue, setMinValue, maxValue, setMaxValue, valueGap}) {
           type="range"
           className="range-max"
           min="0"
-          max="10000"
+          max="100000"
           value={maxValue}
           step="100"
           onChange={handleRangeChange}

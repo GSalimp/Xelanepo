@@ -63,23 +63,26 @@ Bom trabalho para vocês!
 
 ## TODO
 
-### Pesquisa
-- Usar o authors?filter ao inves do autocomplete
-- https://docs.openalex.org/api-entities/authors/search-authors
-
 ### ProfileHeader
 - Pegar os dados de algum lugar = Provavelmente não vamos fazer por ser muito complicado e não ter muito tempo. Mas pode tentar se quiser
 
 ### Works
-- Ordenar por numero de citações
-- Fazer uma paginação via scroll. Explicação: A request da api tem dois parâmetros: per_page e page, o ideal é não pegar todos os itens de uma vez e sim ir pegando por página, então tem q ser feito uma detecção de quando o usuário chegar no fim do scroll trabalhos e fazer outro request com o parâmetro page incrementado de 1 unidade. Segue a documentação: https://docs.openalex.org/api-entities/works/get-lists-of-works#page-and-sort-works
+- Esta ficando com o icone de loading toda vez q vc scrolla na pagina = É isso mesmo
+
+### Mobile
+- Search = Comecei
+- Home
+- Profile 
+
+## TODO - MELHORIAS
+
+### Pesquisa
+- Funcionando, mas não esta boa, acho q não tem como arrumar sem muito trabalho
 
 ### Languages
 - Arrumar o CSS, GPT não mandou muito bem = Pra mim ficou bom, so o mobile que ta quebrado 
 
-### Mobile
-- Tem que fazer. Vai ser bem chato. Home, Pesquisa e Perfil 
-
 ### Outros
 - Tem uma cacetada de warning no console, não sei como resolver
 - Parte de coautores (do enunciado) não esta feita = Precisa fazer?
+- Reacustar os cards pro file pra ficar igual do figma
