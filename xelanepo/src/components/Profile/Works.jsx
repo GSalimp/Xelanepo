@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import { useParams } from "react-router-dom";
 import "./../styles/ProfileItens/Works.css";
 
 function workCard(work, index) {
@@ -43,8 +42,8 @@ function Works({ worksApiUrl }) {
         <div className="loading"></div>
       </div>
     );
-
-  // console.log(works);
+  
+  works.results.sort((a, b) => b.cited_by_count - a.cited_by_count);
 
   return (
     <div className="works profileItem">

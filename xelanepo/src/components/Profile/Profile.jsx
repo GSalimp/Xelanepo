@@ -12,8 +12,8 @@ import { InstitutionsMap } from "./InstitutionsMap";
 import "./../styles/Profile.css";
 
 function Profile(){
-    // const { id } = useParams();  
-    const id = "A5058053632"; 
+    const { id } = useParams();  
+    // const id = "A5058053632"; 
     const [author, setAuthor] = useState({});
     const [worksApiUrl, setWorksApiUrl] = useState("");
     const [personalInfo, setPersonalInfo] = useState({});
