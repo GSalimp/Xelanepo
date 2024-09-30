@@ -2,6 +2,10 @@
 
 Xelanepo is a web application that allows users to search for paper authors. Built with React, it provides an intuitive interface for discovering researchers, their work, and related publications.
 
+# Authors
+- Guilherme Salim Monteiro de Castro Paes
+- Mateus Filipe Moreira Silva
+
 ## Features
 
 - **Author Search:** Find paper authors by name, field, or keywords.
@@ -11,10 +15,8 @@ Xelanepo is a web application that allows users to search for paper authors. Bui
 ## Technologies Used
 
 - **Frontend:** React
-- **State Management:** React Hooks / Context API
-- **Styling:** CSS / TailwindCSS (Optional: Specify framework if used)
-- **API Integration:** REST or GraphQL (Specify if an external API is used)
-- **Testing:** Jest / React Testing Library (Optional)
+- **Styling:** CSS
+- **API Integration:** OpenAlex API
 
 ## Installation
 
@@ -69,7 +71,6 @@ Bom trabalho para vocês!
 - Pegar os dados de algum lugar = Provavelmente não vamos fazer por ser muito complicado e não ter muito tempo. Mas pode tentar se quiser
 
 ### Works
-- Eu so mudei o request de lugar (Do Profile.jsx pro Works.jsx)
 - Ordenar por numero de citações
 - Fazer uma paginação via scroll. Explicação: A request da api tem dois parâmetros: per_page e page, o ideal é não pegar todos os itens de uma vez e sim ir pegando por página, então tem q ser feito uma detecção de quando o usuário chegar no fim do scroll trabalhos e fazer outro request com o parâmetro page incrementado de 1 unidade. Segue a documentação: https://docs.openalex.org/api-entities/works/get-lists-of-works#page-and-sort-works
 
