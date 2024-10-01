@@ -3,11 +3,9 @@ import * as d3 from "d3";
 
 import "./../styles/ProfileItens/Languages.css";
 
-const SunburstChart = ({ data, width = 400, radius = 200, color = d3.scaleOrdinal(d3.schemeCategory10) }) => {
-    const ref = useRef();
-
+const SunburstChart = ({ data, width = 400, radius = 200, color = d3.scaleOrdinal(d3.schemeCategory10), chartRef }) => {
     useEffect(() => {
-        d3.select(ref.current).select("svg").remove();
+        d3.select(chartRef.current).select("svg").remove();
 
         if (!data || data.length === 0) return;
 
@@ -24,7 +22,7 @@ const SunburstChart = ({ data, width = 400, radius = 200, color = d3.scaleOrdina
 
         const root = partition(rootData);
 
-        const svg = d3.select(ref.current).append("svg")
+        const svg = d3.select(chartRef.current).append("svg")
             .attr("viewBox", `${-radius} ${-radius} ${width} ${width}`)
             .style("max-width", `${width}px`)
             .style("font", "12px sans-serif");
@@ -85,9 +83,9 @@ const SunburstChart = ({ data, width = 400, radius = 200, color = d3.scaleOrdina
                 label.select(".language-name").text(d.data.name);
             });
 
-    }, [data, radius, width, color]);
+    }, [data, radius, width, color, chartRef]);
 
-    return <div ref={ref}></div>;
+    return <div ref={chartRef}></div>;
 };
 
 const Legend = ({ languages }) => {
@@ -118,6 +116,7 @@ const Legend = ({ languages }) => {
 
 function Languages({ id }) {
     const [languages, setLanguages] = useState([]);
+    const chartRef = useRef();
 
     useEffect(() => {
         async function fetchLanguages() {
@@ -153,9 +152,9 @@ function Languages({ id }) {
     return (
         <div className="Languages profileItem">
             <span className="profileItemTitle">Languages</span>
-            <div className="languageChart">
-                <SunburstChart data={languages} />
+            <div className="languageChart" ref={chartRef}>
                 <Legend languages={languages} />
+                <SunburstChart data={languages} chartRef={chartRef} />
             </div>
         </div>
     );

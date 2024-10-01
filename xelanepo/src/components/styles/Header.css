@@ -14,11 +14,12 @@ body {
   padding: 20px 50px;
   background-color: #ffffff;
   border-bottom: 1px solid #ddd;
+  flex-wrap: wrap;
 }
 
 .header .logo {
   font-size: 32px;
-  font-family: Plus Jakarta Sans;
+  font-family: 'Exo 2', sans-serif;
   font-weight: 700;
   line-height: 150%;
   letter-spacing: -3%;
@@ -46,4 +47,10 @@ body {
 
 .header nav ul li a:hover {
   color: #3458d8;
+}
+
+@media (max-width: 768px) {
+  .header{
+    justify-content: center;
+  }
 }

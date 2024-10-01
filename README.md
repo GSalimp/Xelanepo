@@ -62,27 +62,24 @@ Prazo: 07/10/24
 Bom trabalho para vocês!
 
 ## TODO
+### Works
+- Esta ficando com o icone de loading toda vez q vc scrolla na pagina = É isso mesmo
+- Acho q esta fazendo requisição repedidamente, da uma olhada no terminal, tem um warning que fica incrementadno quando o scroll não esta na parte de work
+
+### Mobile
+- Search = Comecei
+- Home = Feito 
+- Profile = Feito
+
+## TODO - MELHORIAS
 
 ### ProfileHeader
 - Pegar os dados de algum lugar = Provavelmente não vamos fazer por ser muito complicado e não ter muito tempo. Mas pode tentar se quiser
 
-### Works
-- Esta ficando com o icone de loading toda vez q vc scrolla na pagina = É isso mesmo
-
-### Mobile
-- Search = Comecei
-- Home
-- Profile 
-
-## TODO - MELHORIAS
-
 ### Pesquisa
 - Funcionando, mas não esta boa, acho q não tem como arrumar sem muito trabalho
-
-### Languages
-- Arrumar o CSS, GPT não mandou muito bem = Pra mim ficou bom, so o mobile que ta quebrado 
 
 ### Outros
 - Tem uma cacetada de warning no console, não sei como resolver
 - Parte de coautores (do enunciado) não esta feita = Precisa fazer?
-- Reacustar os cards pro file pra ficar igual do figma
+- Reajustar cards do profile pra ficar igual o do figma

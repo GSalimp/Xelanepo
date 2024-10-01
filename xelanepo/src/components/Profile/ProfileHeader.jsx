@@ -45,7 +45,7 @@ function ProfileHeader({ personalInfo }) {
                     <div className="stat-item">
                         <span className="label">2yr_mean_citedness</span>
                         <div className="line"></div>
-                        <span className="value">{personalInfo.summary_stats["2yr_mean_citedness"]}</span>
+                        <span className="value">{personalInfo.summary_stats["2yr_mean_citedness"].toFixed(8)}</span>
                     </div>
                     <div className="stat-item">
                         <span className="label">h_index</span>

@@ -14,6 +14,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 5px;
 }
 
 .footer nav ul {
@@ -56,5 +58,8 @@ body {
 
   .social-icons {
     gap: 10px;
+  }
+  .footer {
+    justify-content: center;
   }
 }

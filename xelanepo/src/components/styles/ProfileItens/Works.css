@@ -14,7 +14,7 @@
     width: 100%;
     max-height: 300px;
     overflow: scroll;
-    scrollbar-width: none;
+    scrollbar-width: thin;
 }
 
 .work-card:hover {

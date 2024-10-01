@@ -10,6 +10,8 @@
     align-items: center;
     width: 100%;                    /* Full width of the parent container */
     height: 100%;                   /* Full height of the parent container */
+    flex-wrap: wrap;
+    gap: 20px;                      /* Space between chart and legend */
 }
 
 .languageChart > div > svg {
@@ -25,6 +27,10 @@
     display: flex;
     flex-direction: column;
     gap: 10px;                     /* Space between legend items */
+    width: 300px;               /* Limit the width of the legend */
+    max-height: 300px;               /* Limit the width of the legend */
+    overflow: auto;               /* Hide overflow */
+    scrollbar-width: thin;          /* Thin scrollbar */
 }
 
 .legend-item {
@@ -52,3 +58,9 @@
     color: #888;                   /* Lightest color for percentage */
     margin-left: auto;             /* Push percentage to the right */
 }
+
+@media (max-width: 600px) {
+    .legend {
+        width: 100%;
+    }
+  }

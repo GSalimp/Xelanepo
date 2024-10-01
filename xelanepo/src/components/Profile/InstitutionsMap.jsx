@@ -32,7 +32,8 @@ const MapComponent = ({ markers, selectedPosition, targetZoom }) => {
     return (
         <LoadScript googleMapsApiKey="AIzaSyDu8mqAzl88lu18Vlrb51GeyFl3zh92NEg">
             <GoogleMap
-                mapContainerStyle={{ width: '900px', height: '300px' }}
+                className="googleMap"
+                mapContainerStyle={{ width: '100%', height: '300px' }}
                 zoom={currentZoom}
                 onLoad={map => {
                     mapRef.current = map;
@@ -88,7 +89,7 @@ function InstitutionsMap({ id }) {
                     };
                 });
 
-                await new Promise(r => setTimeout(r, 1000));
+                await new Promise(r => setTimeout(r, 10));
 
                 const institutionsRequest = await fetch(`https://api.openalex.org/institutions?filter=id:${institutionIDList.join("|")}`);
                 const institutionsData = await institutionsRequest.json();
@@ -145,7 +146,7 @@ function InstitutionsMap({ id }) {
                         />
                     ))}
                 </div>
-                <MapComponent markers={markers} selectedPosition={selectedPosition} targetZoom={zoomLevel} />
+                <MapComponent className="googleMap" markers={markers} selectedPosition={selectedPosition} targetZoom={zoomLevel} />
             </div>
         </div>
     );
