@@ -1,0 +1,92 @@
+.profile-details{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: center; */
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+    gap: 20px;
+
+    flex-wrap: wrap;
+
+    & .profile-details-rigth-warper{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        /* flex-grow: 1; */
+        gap: 20px;
+        margin-right: auto;
+        flex-wrap: wrap;
+    }
+
+    & .profile-img-header{
+        margin: 0;
+        overflow: hidden;
+
+    }
+
+    & .profile-details-itens{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        & .profile-details-iten{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            text-wrap: wrap;
+            font-family: 'Poppins';
+
+            & .iten-title{
+                color: #333;
+            }
+
+            & .iten-content{
+                color: #000000;
+                font-weight: bold;
+            }
+        }
+    }
+
+    &  .stats{
+        /* margin-left: 50%; */
+        /* align-self: flex-end; */
+        min-width: 200px;
+
+        .stats {
+            width: 300px;
+            font-family: Arial, sans-serif;
+          }
+        
+          .stat-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+          }
+        
+          .label {
+            color: gray;
+            white-space: nowrap;
+          }
+        
+          .line {
+            flex-grow: 1;
+            height: 1px;
+            background-color: lightgray;
+            margin: 0 10px;
+          }
+        
+          .value {
+            font-weight: bold;
+          }
+    } 
+}
+
+@media (max-width: 600px) {
+  .profile-img-header{
+    /* align-self: center; */
+    margin: 0 auto !important;
+  }
+}
