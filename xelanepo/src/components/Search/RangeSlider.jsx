@@ -20,7 +20,7 @@ function RangeSlider({minValue, setMinValue, maxValue, setMaxValue, valueGap}) {
 
   const handleMaxInputChange = (e) => {
     const value = parseInt(e.target.value);
-    if (value <= 100000 && value >= minValue + valueGap) {
+    if (value <= 1000000 && value >= minValue + valueGap) {
       setMaxValue(value);
     }
   };
@@ -40,8 +40,8 @@ function RangeSlider({minValue, setMinValue, maxValue, setMaxValue, valueGap}) {
         <div
           className="progress"
           style={{
-            left: `${(minValue / 100000) * 100}%`,
-            right: `${100 - (maxValue / 100000) * 100}%`,
+            left: `${(minValue / 1000000) * 100}%`,
+            right: `${100 - (maxValue / 1000000) * 100}%`,
           }}
         ></div>
       </div>
@@ -50,7 +50,7 @@ function RangeSlider({minValue, setMinValue, maxValue, setMaxValue, valueGap}) {
           type="range"
           className="range-min"
           min="0"
-          max="100000"
+          max="1000000"
           value={minValue}
           step="100"
           onChange={handleRangeChange}
@@ -59,7 +59,7 @@ function RangeSlider({minValue, setMinValue, maxValue, setMaxValue, valueGap}) {
           type="range"
           className="range-max"
           min="0"
-          max="100000"
+          max="1000000"
           value={maxValue}
           step="100"
           onChange={handleRangeChange}

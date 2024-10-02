@@ -66,20 +66,18 @@ Bom trabalho para vocês!
 - Esta ficando com o icone de loading toda vez q vc scrolla na pagina = É isso mesmo
 - Acho q esta fazendo requisição repedidamente, da uma olhada no terminal, tem um warning que fica incrementadno quando o scroll não esta na parte de work
 
-### Mobile
-- Search = Comecei
-- Home = Feito 
-- Profile = Feito
-
 ## TODO - MELHORIAS
 
 ### ProfileHeader
 - Pegar os dados de algum lugar = Provavelmente não vamos fazer por ser muito complicado e não ter muito tempo. Mas pode tentar se quiser
 
-### Pesquisa
-- Funcionando, mas não esta boa, acho q não tem como arrumar sem muito trabalho
-
 ### Outros
 - Tem uma cacetada de warning no console, não sei como resolver
 - Parte de coautores (do enunciado) não esta feita = Precisa fazer?
 - Reajustar cards do profile pra ficar igual o do figma
+- Tem que clicar duas vezes no botão de clear para realemnte limpar o filtro
+
+### Para a apresentação
+- [Link do Vander](http://127.0.0.1:5173/Profile/A5058053632)
+- Universdiade do Vander = Universidad Evangélica del Paraguay
+- Nome do Vander = Vander L. S. Freitas

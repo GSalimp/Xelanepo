@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef  } from "react";
 import "./../styles/ProfileItens/Works.css";
 
 function workCard(work, index) {
@@ -20,6 +20,7 @@ function Works({ worksApiUrl }) {
   const [works, setWorks] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
+  const worksDivRef = useRef(null);
 
   useEffect(() => {
     async function fetchWorks() {
@@ -38,16 +39,26 @@ function Works({ worksApiUrl }) {
   }, [page, worksApiUrl]);
 
   useEffect(() => {
+    const worksDiv = worksDivRef.current;
+  
     function handleScroll() {
-      const worksDiv = document.querySelector(".works");
-      const bottom = worksDiv && window.innerHeight + window.scrollY >= worksDiv.offsetTop + worksDiv.scrollHeight - 50;
-      if (bottom && !loading) {
-        setPage((prevPage) => prevPage + 1);
+      if (worksDiv) {
+        const bottom = worksDiv.scrollHeight - worksDiv.scrollTop <= worksDiv.clientHeight + 50;
+        if (bottom && !loading) {
+          setPage((prevPage) => prevPage + 1);
+        }
       }
     }
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+  
+    if (worksDiv) {
+      worksDiv.addEventListener("scroll", handleScroll);
+    }
+  
+    return () => {
+      if (worksDiv) {
+        worksDiv.removeEventListener("scroll", handleScroll);
+      }
+    };
   }, [loading]);
 
   if (works.length === 0 || worksApiUrl === "")
@@ -63,7 +74,7 @@ function Works({ worksApiUrl }) {
   return (
     <div className="works profileItem">
       <span className="profileItemTitle">Works</span>
-      <div className="work-itens">
+      <div className="work-itens" ref={worksDivRef}>
         {works.map((work, index) => workCard(work, index))}
       </div>
       {loading && <div className="loading"></div>}
