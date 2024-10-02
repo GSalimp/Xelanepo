@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { GoogleMap, LoadScript, MarkerF } from '@react-google-maps/api';
+import { GoogleMap, MarkerF } from '@react-google-maps/api';
 import "./../styles/ProfileItens/InstitutionsMap.css";
 
 const MapComponent = ({ markers, selectedPosition, targetZoom }) => {
@@ -30,24 +30,22 @@ const MapComponent = ({ markers, selectedPosition, targetZoom }) => {
     }, [selectedPosition, targetZoom]);
 
     return (
-        <LoadScript googleMapsApiKey="AIzaSyDu8mqAzl88lu18Vlrb51GeyFl3zh92NEg">
-            <GoogleMap
-                className="googleMap"
-                mapContainerStyle={{ width: '100%', height: '300px' }}
-                zoom={currentZoom}
-                onLoad={map => {
-                    mapRef.current = map;
-                }}
-                onUnmount={() => mapRef.current = null}
-            >
-                {markers.map((marker, index) => (
-                    <MarkerF
-                        key={index}
-                        position={marker}
-                    />
-                ))}
-            </GoogleMap>
-        </LoadScript>
+        <GoogleMap
+            className="googleMap"
+            mapContainerStyle={{ width: '100%', height: '300px' }}
+            zoom={currentZoom}
+            onLoad={map => {
+                mapRef.current = map;
+            }}
+            onUnmount={() => mapRef.current = null}
+        >
+            {markers.map((marker, index) => (
+                <MarkerF
+                    key={index}
+                    position={marker}
+                />
+            ))}
+        </GoogleMap>
     );
 };
 
