@@ -69,8 +69,6 @@ function Works({ worksApiUrl }) {
       </div>
     );
 
-  works.sort((a, b) => b.cited_by_count - a.cited_by_count);
-
   return (
     <div className="works profileItem">
       <span className="profileItemTitle">Works</span>
