@@ -38,34 +38,6 @@ To run this project locally:
    ```bash
     npm run dev
 
-## ENUNCIADO
-
-Projeto Final - Apresentação em 07/10/24
-Desenvolver uma página responsiva que mostra alguns dados da produção científica de um cientista, obtidos a partir da OpenAlex (https://openalex.org/). 
-Os dados que devem ser mostrados dizem respeito a:
-
--~~Número de artigos publicados~~
--~~Instituição onde a pessoa trabalha atualmente e já trabalhou antes~~
--~~Índices~~
--~~Tópicos mais abordados pelo cientista nos artigos~~
--Quais são os colaboradores desse cientista (coautores nos artigos)
--Quais desses coautores são mais frequentes.
--~~Quais são os artigos mais importantes (mais citados)~~
-
-Usem a criatividade para mostrar esses dados de forma interessante e, se possível, interativa (clicar nos co-autores, voltar ao autor anterior, arrastar, etc, etc).
-Olha só o que o próprio site da OpenAlex traz, para se inspirarem: https://openalex.org/works?page=1&filter=authorships.author.id%3Aa5058053632
-O projeto poderá ser feito em dupla.
-No dia 07/10/24 todas as duplas irão fazer uma apresentação de 5 a 10 minutos sobre seus projetos, mostrando o resultado final, como interagir com a página, mencionando quais tecnologias foram utilizadas e outros detalhes que acharem pertinente. Não é preciso utilizar slides.
-A entrega pode ser feita a partir do link do repositório (github) ou com os arquivos todos em um zip.
-Coloque o nome dos integrantes da dupla. Apenas 1 integrante da dupla deve entregar, que eu contabilizo a nota para os dois.
-Prazo: 07/10/24
-Bom trabalho para vocês!
-
-## TODO
-### Works
-- Esta ficando com o icone de loading toda vez q vc scrolla na pagina = É isso mesmo
-- Acho q esta fazendo requisição repedidamente, da uma olhada no terminal, tem um warning que fica incrementadno quando o scroll não esta na parte de work
-
 ## TODO - MELHORIAS
 
 ### ProfileHeader
